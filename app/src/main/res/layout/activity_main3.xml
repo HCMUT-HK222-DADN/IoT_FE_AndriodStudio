@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity3"
+    android:orientation="vertical">
+
+
+    <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "0dp"
+        android:layout_weight = "3"
+
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/logo"
+            android:textAlignment="center"
+
+            >
+
+        </TextView>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "0dp"
+        android:layout_weight = "3"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width = "0dp"
+            android:layout_height = "match_parent"
+            android:layout_weight = "1"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:id="@+id/livingtext"
+                android:textAlignment="center"
+                android:text="Living Room">
+            </TextView>
+
+            <Button
+                android:id="@+id/living_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/noun_living_3664293"
+                android:gravity="center"
+                android:paddingLeft="30dp"></Button>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width = "0dp"
+            android:layout_height = "match_parent"
+            android:layout_weight = "1"
+            android:orientation="vertical"
+            >
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:id="@+id/bedroomtext"
+                android:textAlignment="center"
+                android:text="Bedroom">
+            </TextView>
+            <Button
+                android:id="@+id/bedroom_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/noun_bedroom_1122147"
+                android:gravity="center"
+                android:background="@color/white"
+                android:paddingLeft="30dp"
+                >
+            </Button>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width = "0dp"
+            android:layout_height = "match_parent"
+            android:layout_weight = "1"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="20dp"
+                android:id="@+id/workingtext"
+                android:textAlignment="center"
+                android:text="Working Room">
+            </TextView>
+            <Button
+                android:id="@+id/working_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/noun_office_room_2366271"
+                android:gravity="center"
+                android:background="@color/white"
+                android:paddingLeft="30dp"
+                >
+            </Button>
+        </LinearLayout>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "0dp"
+        android:layout_weight = "3"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width = "0dp"
+            android:layout_height = "match_parent"
+            android:layout_weight = "1">
+            <TextView
+                android:id="@+id/Temperature"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text = "Temp"
+                android:textSize = "20dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_margin="15dp"
+                android:drawableLeft="@drawable/baseline_device_thermostat_24"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Humidity"
+                android:layout_width="120dp"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:drawableLeft="@drawable/baseline_water_drop_24"
+                android:gravity="center"
+                android:text="Humi"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width = "0dp"
+            android:layout_height = "match_parent"
+            android:layout_weight = "1">
+            <TextView
+                android:id="@+id/light"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text = "light"
+                android:textSize = "20dp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:layout_margin="15dp"
+                android:drawableLeft="@drawable/baseline_light_mode_24"
+                />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "0dp"
+        android:layout_weight = "5"
+        android:orientation="vertical"
+        >
+
+        <TextView
+            android:id="@+id/textlight"
+            android:layout_width="wrap_content"
+            android:layout_height="58dp"
+            android:layout_marginLeft="120dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text="Light Button"
+            android:textSize="30dp"
+            android:textStyle="bold"></TextView>
+
+        <com.github.angads25.toggle.widget.DayNightSwitch
+            android:id="@+id/lightswitch"
+            android:layout_width="240dp"
+            android:layout_height="110dp"
+            android:layout_below="@id/textlight"
+            android:layout_marginLeft="80dp"
+            android:textSize="14sp"
+            app:colorBorder="@color/colorAccent"
+            app:on="false" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "0dp"
+        android:layout_weight = "3"
+        android:orientation="vertical">
+
+        <SeekBar
+            android:id="@+id/seekBar1"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:max="100"
+            android:indeterminate="false"
+            android:progress="0"
+            android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/textview1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/seekBar1"
+            android:layout_below="@+id/seekBar1"
+            android:layout_marginLeft="160dp"
+            android:textSize="20dp"
+            android:textStyle="bold"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width = "match_parent"
+        android:layout_height = "0dp"
+        android:layout_weight = "2"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width = "0dp"
+            android:layout_height = "match_parent"
+            android:layout_weight = "1">
+
+            <Button
+                android:id="@+id/home_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/baseline_home_40"
+                android:gravity="center"
+                android:background="@color/white"
+                android:paddingLeft="30dp"
+                >
+            </Button>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width = "0dp"
+            android:layout_height = "match_parent"
+            android:layout_weight = "1">
+
+            <Button
+                android:id="@+id/account_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/baseline_person_24"
+                android:gravity="center"
+                android:paddingLeft="30dp"></Button>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width = "0dp"
+            android:layout_height = "match_parent"
+            android:layout_weight = "1">
+
+            <Button
+                android:id="@+id/notification_button"
+                android:layout_width="114dp"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:drawableLeft="@drawable/baseline_notifications_24"
+                android:gravity="center"
+                android:paddingLeft="30dp"></Button>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width = "0dp"
+            android:layout_height = "match_parent"
+            android:layout_weight = "1">
+            <Button
+                android:id="@+id/setting_button"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:drawableLeft="@drawable/baseline_settings_24"
+                android:gravity="center"
+                android:background="@color/white"
+                android:paddingLeft="30dp"
+                >
+            </Button>
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>
