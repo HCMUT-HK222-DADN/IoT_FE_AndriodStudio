@@ -1,4 +1,8 @@
 package Demo.Android;
+import android.content.Intent;
+import android.graphics.Color;
+import android.view.View;
+import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
@@ -10,6 +14,8 @@ import android.widget.TextView;
 import com.github.angads25.toggle.interfaces.OnToggledListener;
 import com.github.angads25.toggle.model.ToggleableView;
 import com.github.angads25.toggle.widget.DayNightSwitch;
+import com.hookedonplay.decoviewlib.DecoView;
+import com.hookedonplay.decoviewlib.charts.SeriesItem;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
@@ -22,8 +28,9 @@ public class MainActivity3 extends AppCompatActivity {
     MQTTHelper mqttHelper;
     TextView txtTemp,txtHumi,txtLight,tView;
     SeekBar sBar;
-
+    Button logout;
     DayNightSwitch btnLight ;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +41,8 @@ public class MainActivity3 extends AppCompatActivity {
         btnLight =  findViewById(R.id.lightswitch);
         tView = (TextView) findViewById(R.id.textview1);
         sBar = (SeekBar) findViewById(R.id.seekBar1);
+        logout = (Button) findViewById(R.id.logout);
+
         sBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int pval = 0;
             @Override
@@ -43,12 +52,24 @@ public class MainActivity3 extends AppCompatActivity {
             @Override
             public void onStartTrackingTouch(SeekBar seekBar) {
                 //write custom code to on start progress
+
             }
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 tView.setText(pval + "/" + seekBar.getMax());
+                String s = Integer.toString(pval);
+                sendDataMQTT("LamVinh/feeds/fan\n",s);
+
             }
         });
+        //Quay ve trang dang nhap
+       logout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LogOut();
+            }
+        });
+
         btnLight.setOnToggledListener(new OnToggledListener() {
             @Override
             public void onSwitched(ToggleableView toggleableView, boolean isOn) {
@@ -75,6 +96,7 @@ public class MainActivity3 extends AppCompatActivity {
         }catch (MqttException e){
         }
     }
+
     public void startMQTT(){
         mqttHelper = new MQTTHelper(this    );
         mqttHelper.setCallback(new MqttCallbackExtended() {
@@ -106,6 +128,10 @@ public class MainActivity3 extends AppCompatActivity {
                     }
                     else btnLight.setOn(false);
                 }
+                else if(topic.contains("fan")){
+                    sBar.setProgress(Integer.parseInt(message.toString()));
+                    tView.setText((message.toString())+"/" + sBar.getMax());
+                }
             }
 
             @Override
@@ -113,5 +139,9 @@ public class MainActivity3 extends AppCompatActivity {
 
             }
         });
+    }
+    public void LogOut() {
+        Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
     }
 }
