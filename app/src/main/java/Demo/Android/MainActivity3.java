@@ -26,7 +26,7 @@ import java.nio.charset.Charset;
 
 public class MainActivity3 extends AppCompatActivity {
     MQTTHelper mqttHelper;
-    TextView txtTemp,txtHumi,txtLight,tView;
+    TextView txtTemp,txtHumi,txtLight,tView,motion;
     SeekBar sBar;
     Button logout;
     DayNightSwitch btnLight ;
@@ -35,6 +35,7 @@ public class MainActivity3 extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+        motion = findViewById(R.id.motiondetect);
         txtTemp = findViewById(R.id.Temperature);
         txtHumi = findViewById(R.id.Humidity);
         txtLight=findViewById(R.id.light);
@@ -121,6 +122,14 @@ public class MainActivity3 extends AppCompatActivity {
                 }
                 else if(topic.contains("light2")){
                     txtLight.setText(message.toString()+"   lux");
+                }
+                else if(topic.contains("motion")){
+                    if(message.toString().equals("1")){
+                        motion.setText("Detected");
+                    }
+                    else
+                        motion.setText("None");
+
                 }
                 else if(topic.contains("button1")){
                     if(message.toString().equals("1")){
