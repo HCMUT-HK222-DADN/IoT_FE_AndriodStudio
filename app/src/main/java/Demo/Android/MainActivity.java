@@ -17,8 +17,8 @@ public class MainActivity extends AppCompatActivity {
     MQTTHelper mqttHelper;
     TextView txtTemp, txtHumi;
     private Button Login_button;
-    DbHumi HumiHelper;
-    DbTemp TempHelper;
+//    DbHumi HumiHelper;
+//    DbTemp TempHelper;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,11 +29,11 @@ public class MainActivity extends AppCompatActivity {
         TextView password = (TextView) findViewById(R.id.password);
         Login_button = (Button) findViewById(R.id.Button_login);
 
-        HumiHelper = new DbHumi(this);
-        TempHelper = new DbTemp(this);
+//        HumiHelper = new DbHumi(this);
+//        TempHelper = new DbTemp(this);
         //Dòng này nên comment khi demo, dòng xóa hết dữ liệu của bảng
-        HumiHelper.deleteAllData();
-       TempHelper.deleteAllData();
+//        HumiHelper.deleteAllData();
+//       TempHelper.deleteAllData();
         //Login function
         Login_button.setOnClickListener(new View.OnClickListener() {
             @Override

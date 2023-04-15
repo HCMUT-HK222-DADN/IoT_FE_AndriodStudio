@@ -26,8 +26,8 @@ public class MainActivity3 extends AppCompatActivityExtended {
     SeekBar sBar;
     Button logout,tempgraph,humigraph,lightgraph;
     DayNightSwitch btnLight ;
-    DbTemp TempHelper;
-    DbHumi HumiHelper;
+    //DbTemp TempHelper;
+    //DbHumi HumiHelper;
     private WebSocketManager webSocketManager;
 
     @Override
@@ -47,8 +47,8 @@ public class MainActivity3 extends AppCompatActivityExtended {
         tempgraph =(Button) findViewById(R.id.temp_button);
         humigraph =(Button) findViewById(R.id.humi_button);
         lightgraph = (Button) findViewById(R.id.light_button);
-        HumiHelper = new DbHumi(this);
-        TempHelper = new DbTemp(this);
+//        HumiHelper = new DbHumi(this);
+//        TempHelper = new DbTemp(this);
 
         // ---------------- Create Websocket object
         webSocketManager = new WebSocketManager(MainActivity3.this);
@@ -58,8 +58,8 @@ public class MainActivity3 extends AppCompatActivityExtended {
         this.initSensorValue();
 
 
-        txtHumi.setText(String.valueOf(HumiHelper.getLastYValue())+"%");
-        txtTemp.setText(String.valueOf(TempHelper.getLastYValue()) + "°C");
+//        txtHumi.setText(String.valueOf(HumiHelper.getLastYValue())+"%");
+//        txtTemp.setText(String.valueOf(TempHelper.getLastYValue()) + "°C");
 
         sBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int pval = 0;
@@ -87,24 +87,24 @@ public class MainActivity3 extends AppCompatActivityExtended {
                 LogOut();
             }
         });
-        tempgraph.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                TempGraph();
-            }
-        });
-        humigraph.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                HumiGraph();
-            }
-        });
-        lightgraph.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                LightGraph();
-            }
-        });
+//        tempgraph.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                TempGraph();
+//            }
+//        });
+//        humigraph.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                HumiGraph();
+//            }
+//        });
+//        lightgraph.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                LightGraph();
+//            }
+//        });
         btnLight.setOnToggledListener(new OnToggledListener() {
             @Override
             public void onSwitched(ToggleableView toggleableView, boolean isOn) {
@@ -192,26 +192,27 @@ public class MainActivity3 extends AppCompatActivityExtended {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
     }
-    public void TempGraph() {
-        Intent intent = new Intent(this, TempGraph.class);
-        startActivity(intent);
-    }
-    public void HumiGraph() {
-        Intent intent = new Intent(this, HumiGraph.class);
-        startActivity(intent);
-    }
-    public void LightGraph() {
-        Intent intent = new Intent(this, Light_graph.class);
-        startActivity(intent);
-    }
+//    public void TempGraph() {
+//        Intent intent = new Intent(this, TempGraph.class);
+//        startActivity(intent);
+//    }
+//    public void HumiGraph() {
+//        Intent intent = new Intent(this, HumiGraph.class);
+//        startActivity(intent);
+//    }
+//    public void LightGraph() {
+//        Intent intent = new Intent(this, Light_graph.class);
+//        startActivity(intent);
+//    }
     public void initSensorValue() {
         this.webSocketManager.sendMessage("RequestUpdateSensor");
     }
     @Override
     public void updateSensorValue(JSONObject jsonObject) {
-        int tempValue = jsonObject.optInt("Temp");
-        int humiValue = jsonObject.optInt("Humi");
-        int lightValue = jsonObject.optInt("Light");
+        Log.w("WebSocket", "Activity Received JSON File success.");
+        String tempValue = jsonObject.optString("Temp");
+        String humiValue = jsonObject.optString("Humi");
+        String lightValue = jsonObject.optString("Light");
         int motionValue = jsonObject.optInt("Motion");
         txtTemp.setText(tempValue);
         txtHumi.setText(humiValue);

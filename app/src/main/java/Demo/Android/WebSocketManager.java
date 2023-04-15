@@ -30,6 +30,7 @@ public class WebSocketManager extends WebSocketListener {
         JSONObject jsonObject = new JSONObject();
         try {
             jsonObject.put("Type", message);
+            Log.w("WebSocket", "Send Success.");
             String jsonString = jsonObject.toString();
             this.webSocket.send(jsonString);
         } catch (JSONException e) {
@@ -48,6 +49,7 @@ public class WebSocketManager extends WebSocketListener {
         // Received message in JSON
         try {
             JSONObject jsonObject = new JSONObject(text);
+            Log.w("WebSocket", "WebSocket Received JSON File success.");
             String messageType = jsonObject.optString("Type");
             switch (messageType) {
                 case "UpdateSenSor":
