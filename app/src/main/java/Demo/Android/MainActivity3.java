@@ -5,25 +5,22 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.Toast;
-
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.TextView;
-
 import com.github.angads25.toggle.interfaces.OnToggledListener;
 import com.github.angads25.toggle.model.ToggleableView;
 import com.github.angads25.toggle.widget.DayNightSwitch;
-
-
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.json.JSONObject;
 
 import java.nio.charset.Charset;
 
-public class MainActivity3 extends AppCompatActivity {
+public class MainActivity3 extends AppCompatActivityExtended {
     MQTTHelper mqttHelper;
     TextView txtTemp,txtHumi,txtLight,tView,motion;
     SeekBar sBar;
@@ -31,16 +28,19 @@ public class MainActivity3 extends AppCompatActivity {
     DayNightSwitch btnLight ;
     DbTemp TempHelper;
     DbHumi HumiHelper;
+    private WebSocketManager webSocketManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // ---------------- Init
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+        // ---------------- Create object to handle button
         motion = findViewById(R.id.motiondetect);
         txtTemp = findViewById(R.id.Temperature);
         txtHumi = findViewById(R.id.Humidity);
-        txtLight=findViewById(R.id.light);
-        btnLight =  findViewById(R.id.lightswitch);
+        txtLight = findViewById(R.id.light);
+        btnLight = findViewById(R.id.lightswitch);
         tView = (TextView) findViewById(R.id.textview1);
         sBar = (SeekBar) findViewById(R.id.seekBar1);
         logout = (Button) findViewById(R.id.logout);
@@ -49,6 +49,14 @@ public class MainActivity3 extends AppCompatActivity {
         lightgraph = (Button) findViewById(R.id.light_button);
         HumiHelper = new DbHumi(this);
         TempHelper = new DbTemp(this);
+
+        // ---------------- Create Websocket object
+        webSocketManager = new WebSocketManager(MainActivity3.this);
+        webSocketManager.start();
+
+        // ---------------- Init 4 sensor value
+        this.initSensorValue();
+
 
         txtHumi.setText(String.valueOf(HumiHelper.getLastYValue())+"%");
         txtTemp.setText(String.valueOf(TempHelper.getLastYValue()) + "°C");
@@ -108,7 +116,8 @@ public class MainActivity3 extends AppCompatActivity {
                 }
             }
         });
-        startMQTT();
+        // Now using websocket, so we comment out MQTT
+        // startMQTT();
     }
     public void sendDataMQTT(String topic, String value){
         MqttMessage msg = new MqttMessage();
@@ -178,6 +187,7 @@ public class MainActivity3 extends AppCompatActivity {
         });
     }
 
+    //  ---------------- Addition Method
     public void LogOut() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
@@ -193,5 +203,24 @@ public class MainActivity3 extends AppCompatActivity {
     public void LightGraph() {
         Intent intent = new Intent(this, Light_graph.class);
         startActivity(intent);
+    }
+    public void initSensorValue() {
+        this.webSocketManager.sendMessage("RequestUpdateSensor");
+    }
+    @Override
+    public void updateSensorValue(JSONObject jsonObject) {
+        int tempValue = jsonObject.optInt("Temp");
+        int humiValue = jsonObject.optInt("Humi");
+        int lightValue = jsonObject.optInt("Light");
+        int motionValue = jsonObject.optInt("Motion");
+        txtTemp.setText(tempValue);
+        txtHumi.setText(humiValue);
+        txtLight.setText(lightValue);
+        if (motionValue == 1) {
+            motion.setText("Detected");
+        } else {
+            motion.setText("None");
+        }
+
     }
 }
