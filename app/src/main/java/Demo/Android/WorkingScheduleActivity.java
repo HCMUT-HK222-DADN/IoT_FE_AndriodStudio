@@ -10,6 +10,9 @@ import android.widget.TextView;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class WorkingScheduleActivity extends AppCompatActivityExtended {
     Button logout;
     ListView list_view;
@@ -29,10 +32,12 @@ public class WorkingScheduleActivity extends AppCompatActivityExtended {
         webSocketManager.start();
 
         // ---------------- Init View
-        String[] items = {"Item 1", "Item 2", "Item 3", "Item 4", "Item 5", "Item 5", "Item 5",
-            "Item 5", "Item 5", "Item 5", "Item 5", "Item 5", "Item 5", "Item 5", "Item 5"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, android.R.id.text1, items);
+        List<WorkingScheduleData> dataList = new ArrayList<>();
+        dataList.add(new WorkingScheduleData(1));
+        dataList.add(new WorkingScheduleData(2));
+        dataList.add(new WorkingScheduleData(3));
+        dataList.add(new WorkingScheduleData(4));
+        WorkingScheduleAdapter adapter = new WorkingScheduleAdapter(this, dataList);
         list_view.setAdapter(adapter);
         list_view.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
 
