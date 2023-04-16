@@ -24,7 +24,7 @@ public class MainActivity3 extends AppCompatActivityExtended {
     MQTTHelper mqttHelper;
     TextView txtTemp,txtHumi,txtLight,tView,motion;
     SeekBar sBar;
-    Button logout,tempgraph,humigraph,lightgraph;
+    Button logout, tempgraph, humigraph, lightgraph, btnWorking;
     DayNightSwitch btnLight ;
     //DbTemp TempHelper;
     //DbHumi HumiHelper;
@@ -44,11 +44,13 @@ public class MainActivity3 extends AppCompatActivityExtended {
         tView = (TextView) findViewById(R.id.textview1);
         sBar = (SeekBar) findViewById(R.id.seekBar1);
         logout = (Button) findViewById(R.id.logout);
-        tempgraph =(Button) findViewById(R.id.temp_button);
-        humigraph =(Button) findViewById(R.id.humi_button);
+        tempgraph = (Button) findViewById(R.id.temp_button);
+        humigraph = (Button) findViewById(R.id.humi_button);
         lightgraph = (Button) findViewById(R.id.light_button);
-//        HumiHelper = new DbHumi(this);
-//        TempHelper = new DbTemp(this);
+        btnWorking = (Button) findViewById(R.id.working_button);
+
+        // HumiHelper = new DbHumi(this);
+        // TempHelper = new DbTemp(this);
 
         // ---------------- Create Websocket object
         webSocketManager = new WebSocketManager(MainActivity3.this);
@@ -58,8 +60,8 @@ public class MainActivity3 extends AppCompatActivityExtended {
         this.initSensorValue();
 
 
-//        txtHumi.setText(String.valueOf(HumiHelper.getLastYValue())+"%");
-//        txtTemp.setText(String.valueOf(TempHelper.getLastYValue()) + "°C");
+        // txtHumi.setText(String.valueOf(HumiHelper.getLastYValue())+"%");
+        // txtTemp.setText(String.valueOf(TempHelper.getLastYValue()) + "°C");
 
         sBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int pval = 0;

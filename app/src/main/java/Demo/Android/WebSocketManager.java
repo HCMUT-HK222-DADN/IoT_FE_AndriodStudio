@@ -1,5 +1,4 @@
 package Demo.Android;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -41,7 +40,7 @@ public class WebSocketManager extends WebSocketListener {
     @Override
     public void onOpen(WebSocket webSocket, Response response) {
         // WebSocket connection opened
-        this.activity.displayIncomingText("Connected!");
+        this.activity.updateServerStatus("Connected");
     }
 
     @Override
