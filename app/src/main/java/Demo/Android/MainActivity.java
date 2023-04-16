@@ -15,7 +15,10 @@ public class MainActivity extends AppCompatActivityExtended {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);webSocketManager = new WebSocketManager(MainActivity.this);
+        setContentView(R.layout.activity_main);
+
+        // ---------------- Create Websocket
+        webSocketManager = new WebSocketManager(MainActivity.this);
         webSocketManager.start();
 
         // ---------------------------- Create buttons and views

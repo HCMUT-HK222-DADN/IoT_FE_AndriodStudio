@@ -18,7 +18,7 @@ import java.nio.charset.Charset;
 
 public class WorkingActivity extends AppCompatActivityExtended {
     TextView txtTemp, txtHumi, txtLight, motion;
-    Button logout;
+    Button logout, workingschedule;
     private WebSocketManager webSocketManager;
 
     @Override
@@ -32,19 +32,26 @@ public class WorkingActivity extends AppCompatActivityExtended {
         txtHumi = findViewById(R.id.Humidity);
         txtLight = findViewById(R.id.light);
         logout = (Button) findViewById(R.id.logout);
+        workingschedule = findViewById(R.id.workingschedule);
 
-        // ---------------- Receive Websocket
+        // ---------------- Create Websocket
         webSocketManager = new WebSocketManager(WorkingActivity.this);
         webSocketManager.start();
 
         // ---------------- Init 4 sensor value
         this.initSensorValue();
 
-        //Quay ve trang dang nhap
+        // ---------------- Init listener
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LogOut();
+            }
+        });
+        workingschedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoWorkingSchedule();
             }
         });
     }
@@ -52,25 +59,37 @@ public class WorkingActivity extends AppCompatActivityExtended {
     public void LogOut() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        webSocketManager.closeSocket();
+        finish();
+    }
+    public void gotoWorkingSchedule() {
+        Intent intent = new Intent(this, WorkingScheduleActivity.class);
+        startActivity(intent);
+        webSocketManager.closeSocket();
+        finish();
     }
     public void initSensorValue() {
         this.webSocketManager.sendMessage("RequestUpdateSensor");
     }
     @Override
     public void updateSensorValue(JSONObject jsonObject) {
-        Log.w("WebSocket", "Activity Received JSON File success.");
-        String tempValue = jsonObject.optString("Temp");
-        String humiValue = jsonObject.optString("Humi");
-        String lightValue = jsonObject.optString("Light");
-        int motionValue = jsonObject.optInt("Motion");
-        txtTemp.setText(tempValue);
-        txtHumi.setText(humiValue);
-        txtLight.setText(lightValue);
-        if (motionValue == 1) {
-            motion.setText("Detected");
-        } else {
-            motion.setText("None");
-        }
-
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                Log.w("WebSocket", "Activity Received JSON File success.");
+                String tempValue = jsonObject.optString("Temp");
+                String humiValue = jsonObject.optString("Humi");
+                String lightValue = jsonObject.optString("Light");
+                int motionValue = jsonObject.optInt("Motion");
+                txtTemp.setText(tempValue);
+                txtHumi.setText(humiValue);
+                txtLight.setText(lightValue);
+                if (motionValue == 1) {
+                    motion.setText("Detected");
+                } else {
+                    motion.setText("None");
+                }
+            }
+        });
     }
 }
