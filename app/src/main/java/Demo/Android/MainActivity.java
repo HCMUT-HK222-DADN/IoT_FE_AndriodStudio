@@ -15,7 +15,8 @@ public class MainActivity extends AppCompatActivityExtended {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main);webSocketManager = new WebSocketManager(MainActivity.this);
+        webSocketManager.start();
 
         // ---------------------------- Create buttons and views
         TextView username = (TextView) findViewById(R.id.username);
@@ -24,8 +25,7 @@ public class MainActivity extends AppCompatActivityExtended {
         serverStatus = findViewById(R.id.serverStatus);
 
         // ---------------------------- Create new websocket
-        webSocketManager = new WebSocketManager(MainActivity.this);
-        webSocketManager.start();
+
 
         // ---------------------------- Create listener
         Login_button.setOnClickListener(new View.OnClickListener() {
@@ -35,11 +35,17 @@ public class MainActivity extends AppCompatActivityExtended {
             }
         });
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+    }
 
     // ---------------------------- Additional method
     public void Loginsuccess() {
         Intent intent = new Intent(this, MainActivity3.class);
         startActivity(intent);
+        webSocketManager.closeSocket();
+        finish();
     }
     public void updateServerStatus(String noti) {
         runOnUiThread(new Runnable() {

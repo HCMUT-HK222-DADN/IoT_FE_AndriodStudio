@@ -33,7 +33,7 @@ public class WorkingActivity extends AppCompatActivityExtended {
         txtLight = findViewById(R.id.light);
         logout = (Button) findViewById(R.id.logout);
 
-        // ---------------- Create Websocket object
+        // ---------------- Receive Websocket
         webSocketManager = new WebSocketManager(WorkingActivity.this);
         webSocketManager.start();
 

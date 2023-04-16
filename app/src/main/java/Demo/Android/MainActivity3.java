@@ -17,7 +17,6 @@ import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.json.JSONObject;
-
 import java.nio.charset.Charset;
 
 public class MainActivity3 extends AppCompatActivityExtended {
@@ -52,7 +51,7 @@ public class MainActivity3 extends AppCompatActivityExtended {
         // HumiHelper = new DbHumi(this);
         // TempHelper = new DbTemp(this);
 
-        // ---------------- Create Websocket object
+        // ---------------- Receive Websocket object
         webSocketManager = new WebSocketManager(MainActivity3.this);
         webSocketManager.start();
 
@@ -83,7 +82,7 @@ public class MainActivity3 extends AppCompatActivityExtended {
             }
         });
         //Quay ve trang dang nhap
-       logout.setOnClickListener(new View.OnClickListener() {
+        logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 LogOut();
@@ -193,6 +192,8 @@ public class MainActivity3 extends AppCompatActivityExtended {
     public void LogOut() {
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
+        webSocketManager.closeSocket();
+        finish();
     }
 //    public void TempGraph() {
 //        Intent intent = new Intent(this, TempGraph.class);
