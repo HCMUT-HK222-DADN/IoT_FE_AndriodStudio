@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WorkingScheduleActivity extends AppCompatActivityExtended {
-    Button logout;
+    Button logout, startSchedule;
     ListView list_view;
     private WebSocketManager webSocketManager;
 
@@ -25,6 +25,7 @@ public class WorkingScheduleActivity extends AppCompatActivityExtended {
         setContentView(R.layout.activity_workingschedule);
         // ---------------- Create object to handle button
         logout = (Button) findViewById(R.id.logout);
+        startSchedule = findViewById(R.id.startSchedule);
         list_view = findViewById(R.id.list_view);
 
         // ---------------- Create Websocket
@@ -49,10 +50,22 @@ public class WorkingScheduleActivity extends AppCompatActivityExtended {
                 LogOut();
             }
         });
+        startSchedule.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                gotoWorkingSession();
+            }
+        });
     }
     //  ---------------- Addition Method
     public void LogOut() {
         Intent intent = new Intent(this, MainActivity.class);
+        startActivity(intent);
+        webSocketManager.closeSocket();
+        finish();
+    }
+    public void gotoWorkingSession() {
+        Intent intent = new Intent(this, WorkingSessionActivity.class);
         startActivity(intent);
         webSocketManager.closeSocket();
         finish();

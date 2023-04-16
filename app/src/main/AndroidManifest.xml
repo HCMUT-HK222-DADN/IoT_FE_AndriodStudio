@@ -25,6 +25,7 @@
             android:exported="false" />
         <activity android:name=".WorkingActivity"/>
         <activity android:name=".WorkingScheduleActivity"/>
+        <activity android:name=".WorkingSessionActivity"/>
         <activity
             android:name=".MainActivity"
             android:exported="true">
