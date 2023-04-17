@@ -51,7 +51,7 @@ public class MainActivity3 extends AppCompatActivityExtended {
         // HumiHelper = new DbHumi(this);
         // TempHelper = new DbTemp(this);
 
-        // ---------------- Receive Websocket object
+        // ---------------- Create Websocket object
         webSocketManager = new WebSocketManager(MainActivity3.this);
         webSocketManager.start();
 
@@ -62,6 +62,8 @@ public class MainActivity3 extends AppCompatActivityExtended {
         // txtHumi.setText(String.valueOf(HumiHelper.getLastYValue())+"%");
         // txtTemp.setText(String.valueOf(TempHelper.getLastYValue()) + "°C");
 
+
+        // ---------------- Init button Listener
         sBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int pval = 0;
             @Override
