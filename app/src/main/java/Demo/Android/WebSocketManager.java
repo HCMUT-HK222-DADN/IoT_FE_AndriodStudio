@@ -25,6 +25,8 @@ public class WebSocketManager extends WebSocketListener implements Serializable 
         client.dispatcher().executorService().shutdown();
     }
 
+//    test git
+
     // ----------------------------------- Handle Function
     public void sendMessage(String message) {
         JSONObject jsonObject = new JSONObject();
