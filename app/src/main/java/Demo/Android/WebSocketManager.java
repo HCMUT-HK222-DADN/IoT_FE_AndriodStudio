@@ -13,7 +13,8 @@ import okio.ByteString;
 public class WebSocketManager extends WebSocketListener implements Serializable {
     private WebSocket webSocket;
     private AppCompatActivityExtended activity;
-    private final String SOCKET_URL = "ws://192.168.1.223:8000/ws/test_FE_Home/";
+//    private final String SOCKET_URL = "ws://192.168.0.239:8000/ws/test_FE_Home/";
+    private final String SOCKET_URL = "ws://192.168.0.239:8000/ws/my_view/";
     // ----------------------------------- Init Function
     public WebSocketManager(AppCompatActivityExtended activity) {
         this.activity = activity;
@@ -56,7 +57,7 @@ public class WebSocketManager extends WebSocketListener implements Serializable 
             Log.w("WebSocket", "WebSocket Received JSON File success.");
             String messageType = jsonObject.optString("Type");
             switch (messageType) {
-                case "UpdateSenSor":
+                case "UpdateSensor":
                     this.activity.updateSensorValue(jsonObject);
                     break;
                 default: break;

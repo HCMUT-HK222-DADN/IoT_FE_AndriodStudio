@@ -51,7 +51,7 @@ public class MainActivity3 extends AppCompatActivityExtended {
         // HumiHelper = new DbHumi(this);
         // TempHelper = new DbTemp(this);
 
-        // ---------------- Receive Websocket object
+        // ---------------- Create Websocket object
         webSocketManager = new WebSocketManager(MainActivity3.this);
         webSocketManager.start();
 
@@ -62,6 +62,8 @@ public class MainActivity3 extends AppCompatActivityExtended {
         // txtHumi.setText(String.valueOf(HumiHelper.getLastYValue())+"%");
         // txtTemp.setText(String.valueOf(TempHelper.getLastYValue()) + "°C");
 
+
+        // ---------------- Init button Listener
         sBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             int pval = 0;
             @Override
@@ -81,7 +83,6 @@ public class MainActivity3 extends AppCompatActivityExtended {
 
             }
         });
-        //Quay ve trang dang nhap
         logout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -95,12 +96,12 @@ public class MainActivity3 extends AppCompatActivityExtended {
                 moveToWorkingActivity();
             }
         });
-//        tempgraph.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                TempGraph();
-//            }
-//        });
+        tempgraph.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                TempGraph();
+            }
+        });
 //        humigraph.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View view) {
@@ -208,10 +209,12 @@ public class MainActivity3 extends AppCompatActivityExtended {
         webSocketManager.closeSocket();
         finish();
     }
-//    public void TempGraph() {
-//        Intent intent = new Intent(this, TempGraph.class);
-//        startActivity(intent);
-//    }
+    public void TempGraph() {
+        Intent intent = new Intent(this, TempGraph.class);
+        startActivity(intent);
+        webSocketManager.closeSocket();
+        finish();
+    }
 //    public void HumiGraph() {
 //        Intent intent = new Intent(this, HumiGraph.class);
 //        startActivity(intent);
