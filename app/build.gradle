@@ -41,9 +41,10 @@ dependencies {
     implementation 'org.eclipse.paho:org.eclipse.paho.client.mqttv3:1.2.5'
     implementation 'org.eclipse.paho:org.eclipse.paho.android.service:1.1.1'
     implementation 'com.github.angads25:toggle:1.1.0'
-    //implementation 'com.jjoe64:graphview:4.2.2'
+    implementation 'com.jjoe64:graphview:4.2.2'
     implementation 'com.github.Gruzer:simple-gauge-android:0.3.1'
     implementation 'com.squareup.okhttp3:okhttp:4.9.3'
+    implementation 'androidx.test.ext:junit:1.1.5'
 
 }
 
